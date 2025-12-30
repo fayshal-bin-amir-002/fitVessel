@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Production-files
-          path: ./build
+          path: ./dist
                     
     
 
@@ -55,12 +55,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: Production-files
-          path: ./build
+          path: ./dist
       - name: Deploy to Github pages
         uses: peaceiris/actions-gh-pages@v4
         with: 
           github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./dist
         
 
 
