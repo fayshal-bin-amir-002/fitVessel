@@ -13,15 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        uses: npm install
 
       - name: Build Project
         run: npm run build
@@ -37,9 +37,9 @@ jobs:
           VITE_STRIPE_PK: ${{ secrets.VITE_STRIPE_PK }}
 
       - name: Upload production-ready build files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: production-files
+          name: Production-files
           path: ./build
                     
     
@@ -52,12 +52,12 @@ jobs:
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: Production-files
-          uses: ./build
+          path: ./build
       - name: Deploy to Github pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with: 
           github_token: ${{ secrets.TOKEN }}
           publish_dir: ./build
